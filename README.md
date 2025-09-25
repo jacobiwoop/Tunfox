@@ -27,7 +27,7 @@ pip install -r requirements.txt
 pip install websockets requests
 ```
 
-### ⚡ Installation de l'exécutable (recommandé)
+### ⚡ Installation de l'exécutable  
 ```bash
 # Rendre l'exécutable utilisable
 chmod +x tunfox
@@ -39,7 +39,7 @@ sudo cp tunfox /usr/local/bin/
 tunfox --help
 ```
 
-### 🏠 Installation locale (alternative)
+### 🏠 Installation locale 
 ```bash
 # Copie dans le dossier personnel
 mkdir -p ~/.local/bin
@@ -57,8 +57,8 @@ source ~/.bashrc  # ou source ~/.zshrc
 Après clonage, vous trouverez :
 ```
 Tunfox/
-├── tunfox              # Exécutable binaire (recommandé)
-├── tunfox.py          # Script Python (alternative)
+├── tunfox              # Exécutable binaire  
+├── tunfox.py          # Script Python 
 ├── requirements.txt   # Dépendances Python
 └── README.md         # Documentation
 ```
@@ -105,7 +105,7 @@ python3 tunfox.py --help
 
 Pour exposer un service local sur le port 3000 (par défaut) :
 ```bash
-# Avec l'exécutable (recommandé)
+# Avec l'exécutable  
 tunfox
 
 # Ou avec Python si nécessaire
@@ -116,7 +116,7 @@ python tunfox.py
 
 ### Exemples d'utilisation
 
-#### Avec l'exécutable tunfox (recommandé)
+#### Avec l'exécutable tunfox  
 ```bash
 tunfox -p 8080
 tunfox -t mon-api -p 5000
@@ -124,7 +124,7 @@ tunfox --tunnel webapp --port 3000 --verbose
 tunfox --host 192.168.1.100 --port 8000
 ```
 
-#### Avec le script Python (alternative)
+#### Avec le script Python 
 ```bash
 python tunfox.py -p 8080
 python tunfox.py -t mon-api -p 5000
