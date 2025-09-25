@@ -1,6 +1,6 @@
 # TunFox - Client Tunnel
 
-Un client Python pour créer des tunnels sécurisés et exposer vos services locaux sur Internet via des sous-domaines publics.
+Utilisé pour  créer des tunnels sécurisés et exposer vos services locaux sur Internet via des sous-domaines publics.
 
 ## 🚀 Fonctionnalités
 
@@ -207,4 +207,5 @@ En cas de problème :
 
 ---
 
-**TunFox** - Exposez vos services locaux en toute simplicité ! 🦊
+**TunFox** - Exposez vos services locaux en toute simplicité ! 
+              with ❤️ by aiko 🦊
