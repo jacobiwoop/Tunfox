@@ -1,6 +1,6 @@
 # TunFox - Client Tunnel
 
-Utilisé pour  créer des tunnels sécurisés et exposer vos services locaux sur Internet via des sous-domaines publics.
+Un client Python pour créer des tunnels sécurisés et exposer vos services locaux sur Internet via des sous-domaines publics.
 
 ## 🚀 Fonctionnalités
 
@@ -12,15 +12,26 @@ Utilisé pour  créer des tunnels sécurisés et exposer vos services locaux sur
 
 ## 🛠 Installation
 
-### Récupération du code
+### 📦 Récupération du code
 ```bash
 git clone https://github.com/jacobiwoop/Tunfox.git
 cd Tunfox
-chmod +x tunfox
 ```
 
-### Installation dans le PATH (recommandé)
+### 🐍 Installation Python (si nécessaire)
 ```bash
+# Installation des dépendances
+pip install -r requirements.txt
+
+# Ou installation manuelle
+pip install websockets requests
+```
+
+### ⚡ Installation de l'exécutable (recommandé)
+```bash
+# Rendre l'exécutable utilisable
+chmod +x tunfox
+
 # Installation globale (nécessite sudo/admin)
 sudo cp tunfox /usr/local/bin/
 
@@ -28,7 +39,7 @@ sudo cp tunfox /usr/local/bin/
 tunfox --help
 ```
 
-### Installation locale (alternative)
+### 🏠 Installation locale (alternative)
 ```bash
 # Copie dans le dossier personnel
 mkdir -p ~/.local/bin
@@ -41,11 +52,52 @@ export PATH="$HOME/.local/bin:$PATH"
 source ~/.bashrc  # ou source ~/.zshrc
 ```
 
-### Utilisation sans installation
+### 📁 Structure du projet
+
+Après clonage, vous trouverez :
+```
+Tunfox/
+├── tunfox              # Exécutable binaire (recommandé)
+├── tunfox.py          # Script Python (alternative)
+├── requirements.txt   # Dépendances Python
+└── README.md         # Documentation
+```
+
+## 🚀 Démarrage rapide
+
+1. **Installation express** :
+   ```bash
+   git clone https://github.com/jacobiwoop/Tunfox.git
+   cd Tunfox
+   chmod +x tunfox
+   ```
+
+2. **Test immédiat** :
+   ```bash
+   ./tunfox -p 8000  # Expose le port 8000 local
+   ```
+
+3. **Installation permanente** :
+   ```bash
+   sudo cp tunfox /usr/local/bin/
+   tunfox --help  # Utilisable partout
+   ``` sans installation
+
+#### Option 1: Exécutable binaire
 ```bash
 # Directement depuis le dossier
+chmod +x tunfox
 ./tunfox --help
 ```
+
+#### Option 2: Script Python
+```bash
+# Si l'exécutable ne fonctionne pas
+python tunfox.py --help
+python3 tunfox.py --help
+```
+
+## 🔧 Utilisation
 
 ## 🔧 Utilisation
 
@@ -53,36 +105,33 @@ source ~/.bashrc  # ou source ~/.zshrc
 
 Pour exposer un service local sur le port 3000 (par défaut) :
 ```bash
+# Avec l'exécutable (recommandé)
 tunfox
+
+# Ou avec Python si nécessaire
+python tunfox.py
 ```
 
 *Note: Remplacez `tunfox` par `./tunfox` si vous n'avez pas installé dans le PATH*
 
 ### Exemples d'utilisation
 
-#### Serveur web local sur port 8080
+#### Avec l'exécutable tunfox (recommandé)
 ```bash
 tunfox -p 8080
-```
-
-#### Tunnel avec nom personnalisé
-```bash
 tunfox -t mon-api -p 5000
-```
-
-#### API REST avec logs détaillés
-```bash
 tunfox --tunnel webapp --port 3000 --verbose
-```
-
-#### Service sur un host différent
-```bash
 tunfox --host 192.168.1.100 --port 8000
+tunfox -s ws://mon-serveur:8765 -t test -p 4000
 ```
 
-#### Serveur WebSocket personnalisé
+#### Avec le script Python (alternative)
 ```bash
-tunfox -s ws://mon-serveur:8765 -t test -p 4000
+python tunfox.py -p 8080
+python tunfox.py -t mon-api -p 5000
+python tunfox.py --tunnel webapp --port 3000 --verbose
+python tunfox.py --host 192.168.1.100 --port 8000
+python tunfox.py -s ws://mon-serveur:8765 -t test -p 4000
 ```
 
 ## ⚙️ Options disponibles
@@ -180,6 +229,20 @@ tunfox -t monitoring -p 9090
 
 ## 🐛 Résolution de problèmes
 
+### L'exécutable ne fonctionne pas
+```bash
+# Solution 1: Utiliser le script Python
+python tunfox.py --help
+
+# Solution 2: Vérifier les permissions
+chmod +x tunfox
+./tunfox --help
+
+# Solution 3: Installer les dépendances
+pip install -r requirements.txt
+python tunfox.py --help
+```
+
 ### Service local indisponible
 ```
 Erreur: Service local indisponible sur http://localhost:3000
@@ -207,6 +270,6 @@ En cas de problème :
 
 ---
 
-**TunFox** - Exposez vos services locaux en toute simplicité !
+**TunFox** - Exposez vos services locaux en toute simplicité ! 🦊
 
 ....with ❤️ by aiko 🦊
