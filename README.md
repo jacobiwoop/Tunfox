@@ -122,7 +122,6 @@ tunfox -p 8080
 tunfox -t mon-api -p 5000
 tunfox --tunnel webapp --port 3000 --verbose
 tunfox --host 192.168.1.100 --port 8000
-tunfox -s ws://mon-serveur:8765 -t test -p 4000
 ```
 
 #### Avec le script Python (alternative)
@@ -131,7 +130,6 @@ python tunfox.py -p 8080
 python tunfox.py -t mon-api -p 5000
 python tunfox.py --tunnel webapp --port 3000 --verbose
 python tunfox.py --host 192.168.1.100 --port 8000
-python tunfox.py -s ws://mon-serveur:8765 -t test -p 4000
 ```
 
 ## ⚙️ Options disponibles
@@ -140,7 +138,6 @@ python tunfox.py -s ws://mon-serveur:8765 -t test -p 4000
 |--------|-----------|-------------|---------|
 | `--tunnel` | `-t` | Nom du tunnel/sous-domaine | Généré aléatoirement |
 | `--port` | `-p` | Port du service local | 3000 |
-| `--server` | `-s` | Adresse du serveur WebSocket | ws://3.15.215.220:8765 |
 | `--host` | | Host du service local | localhost |
 | `--verbose` | `-v` | Mode verbose (logs détaillés) | Désactivé |
 
@@ -223,9 +220,10 @@ tunfox -t monitoring -p 9090
 ## ⚠️ Notes importantes
 
 - **Sécurité** : Ne pas exposer de services sensibles sans authentification
-- **Performance** : Les requêtes passent par le serveur proxy
+- **Performance** : Les requêtes passent par le serveur proxy officiel
 - **Disponibilité** : Le service dépend de la disponibilité du serveur tunnel
 - **Nom de domaine** : Format automatique `{tunnel}.aiko.qzz.io`
+- **Serveur fixe** : Utilise le serveur officiel TunFox (pas de configuration serveur)
 
 ## 🐛 Résolution de problèmes
 
@@ -252,13 +250,13 @@ Solution: Vérifiez que votre service est démarré sur le bon port
 ### Connexion refusée
 ```
 Erreur: Connexion refusée (tentative 1/5)
-Solution: Vérifiez votre connexion internet et l'adresse du serveur
+Solution: Vérifiez votre connexion internet et la disponibilité du serveur TunFox
 ```
 
 ### URL WebSocket invalide
 ```
 Erreur: URL WebSocket invalide
-Solution: Vérifiez le format de l'URL du serveur (-s option)
+Solution: Problème de configuration interne, redémarrez TunFox ou contactez le support
 ```
 
 ## 📞 Support
@@ -266,7 +264,8 @@ Solution: Vérifiez le format de l'URL du serveur (-s option)
 En cas de problème :
 1. Utilisez le mode verbose (`-v`) pour plus de détails
 2. Vérifiez que votre service local fonctionne
-3. Testez la connectivité au serveur WebSocket
+3. Testez la connectivité internet
+4. Le serveur TunFox est configuré automatiquement
 
 ---
 
