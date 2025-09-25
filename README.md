@@ -1,0 +1,210 @@
+# TunFox - Client Tunnel
+
+Un client Python pour créer des tunnels sécurisés et exposer vos services locaux sur Internet via des sous-domaines publics.
+
+## 🚀 Fonctionnalités
+
+- **Exposition simple** : Rendez vos services locaux accessibles depuis Internet
+- **Sous-domaines automatiques** : Génération automatique ou personnalisation des noms de tunnel
+- **Reconnexion automatique** : Gestion intelligente des déconnexions
+- **Mode verbose** : Logs détaillés pour le débogage
+- **Configuration flexible** : Paramètres personnalisables via arguments
+
+## 🛠 Installation
+
+### Récupération du code
+```bash
+git clone https://github.com/jacobiwoop/Tunfox.git
+cd Tunfox
+chmod +x tunfox
+```
+
+### Installation dans le PATH (recommandé)
+```bash
+# Installation globale (nécessite sudo/admin)
+sudo cp tunfox /usr/local/bin/
+
+# Vérification
+tunfox --help
+```
+
+### Installation locale (alternative)
+```bash
+# Copie dans le dossier personnel
+mkdir -p ~/.local/bin
+cp tunfox ~/.local/bin/
+
+# Ajout au PATH (ajouter à ~/.bashrc ou ~/.zshrc)
+export PATH="$HOME/.local/bin:$PATH"
+
+# Rechargement du shell
+source ~/.bashrc  # ou source ~/.zshrc
+```
+
+### Utilisation sans installation
+```bash
+# Directement depuis le dossier
+./tunfox --help
+```
+
+## 🔧 Utilisation
+
+### Utilisation basique
+
+Pour exposer un service local sur le port 3000 (par défaut) :
+```bash
+tunfox
+```
+
+*Note: Remplacez `tunfox` par `./tunfox` si vous n'avez pas installé dans le PATH*
+
+### Exemples d'utilisation
+
+#### Serveur web local sur port 8080
+```bash
+tunfox -p 8080
+```
+
+#### Tunnel avec nom personnalisé
+```bash
+tunfox -t mon-api -p 5000
+```
+
+#### API REST avec logs détaillés
+```bash
+tunfox --tunnel webapp --port 3000 --verbose
+```
+
+#### Service sur un host différent
+```bash
+tunfox --host 192.168.1.100 --port 8000
+```
+
+#### Serveur WebSocket personnalisé
+```bash
+tunfox -s ws://mon-serveur:8765 -t test -p 4000
+```
+
+## ⚙️ Options disponibles
+
+| Option | Raccourci | Description | Défaut |
+|--------|-----------|-------------|---------|
+| `--tunnel` | `-t` | Nom du tunnel/sous-domaine | Généré aléatoirement |
+| `--port` | `-p` | Port du service local | 3000 |
+| `--server` | `-s` | Adresse du serveur WebSocket | ws://3.15.215.220:8765 |
+| `--host` | | Host du service local | localhost |
+| `--verbose` | `-v` | Mode verbose (logs détaillés) | Désactivé |
+
+## 📊 Affichage des informations
+
+Au démarrage, le client affiche :
+```
+tunfox ...
+============================================================
+📡 Serveur WebSocket: ws://3.15.215.220:8765
+🌐 Tunnel public:     https://abc123def.aiko.qzz.io
+🏠 Service local:     http://localhost:3000
+📊 Mode verbose:      Désactivé
+============================================================
+💡 Appuyez sur Ctrl+C pour arrêter le tunnel
+```
+
+## 🔄 Fonctionnement
+
+1. **Connexion** : Le client se connecte au serveur WebSocket
+2. **Enregistrement** : Demande de création du sous-domaine
+3. **Activation** : Le tunnel devient actif et accessible publiquement
+4. **Proxy** : Les requêtes HTTPS sont transmises vers votre service local
+5. **Réponses** : Les réponses de votre service sont renvoyées aux clients
+
+## 🛡️ Gestion des erreurs
+
+Le client gère automatiquement :
+- **Connexions refusées** : Reconnexion automatique (5 tentatives max)
+- **Services locaux indisponibles** : Retourne une erreur 502
+- **Timeouts** : Retourne une erreur 504 après 10 secondes
+- **Déconnexions** : Reconnexion transparente
+
+## 📝 Logs et débogage
+
+### Mode normal
+```
+2024-01-15 10:30:15 - INFO - Connexion au serveur...
+2024-01-15 10:30:16 - INFO - Tunnel abc123def.aiko.qzz.io activé avec succès!
+```
+
+### Mode verbose (`-v`)
+```
+2024-01-15 10:30:20 - INFO - Requête GET /api/users
+2024-01-15 10:30:21 - INFO - Réponse: 200
+```
+
+## 🚪 Arrêt du tunnel
+
+Pour arrêter le tunnel proprement :
+- Appuyez sur **Ctrl+C**
+- Ou envoyez un signal SIGTERM au processus
+
+## 🌐 Cas d'usage
+
+### Développement web
+```bash
+# Serveur de développement React (port 3000)
+tunfox -t mon-app
+
+# API Node.js (port 8080)
+tunfox -t api-dev -p 8080
+```
+
+### Tests et démonstrations
+```bash
+# Partager une démo rapidement
+tunfox -t demo-client -p 5000 -v
+```
+
+### Services backend
+```bash
+# Base de données avec interface web
+tunfox -t db-admin -p 8081
+
+# Service de monitoring
+tunfox -t monitoring -p 9090
+```
+
+## ⚠️ Notes importantes
+
+- **Sécurité** : Ne pas exposer de services sensibles sans authentification
+- **Performance** : Les requêtes passent par le serveur proxy
+- **Disponibilité** : Le service dépend de la disponibilité du serveur tunnel
+- **Nom de domaine** : Format automatique `{tunnel}.aiko.qzz.io`
+
+## 🐛 Résolution de problèmes
+
+### Service local indisponible
+```
+Erreur: Service local indisponible sur http://localhost:3000
+Solution: Vérifiez que votre service est démarré sur le bon port
+```
+
+### Connexion refusée
+```
+Erreur: Connexion refusée (tentative 1/5)
+Solution: Vérifiez votre connexion internet et l'adresse du serveur
+```
+
+### URL WebSocket invalide
+```
+Erreur: URL WebSocket invalide
+Solution: Vérifiez le format de l'URL du serveur (-s option)
+```
+
+## 📞 Support
+
+En cas de problème :
+1. Utilisez le mode verbose (`-v`) pour plus de détails
+2. Vérifiez que votre service local fonctionne
+3. Testez la connectivité au serveur WebSocket
+
+---
+
+**TunFox** - Exposez vos services locaux en toute simplicité ! 🦊
