@@ -18,7 +18,7 @@ logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(
 logger = logging.getLogger(__name__)
 
 DEFAULT_SUBDOMAIN = ran_subdomain()
-DEFAULT_SERVER = "ws://3.15.215.220:8765"
+DEFAULT_SERVER = "ws://18.222.145.185:8765"
 DEFAULT_PORT = 3000
 
 SUBDOMAIN = None
